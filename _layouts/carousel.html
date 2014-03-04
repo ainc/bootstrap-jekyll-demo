@@ -1,3 +1,13 @@
+---
+tabs:
+  - name: Home
+    url: /
+  - name: About
+    url: /about/
+  - name: Contact
+    url: /contact/
+---
+
 {% include header.html %}
 
 <!-- NAVBAR
@@ -20,10 +30,17 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 
-                <li {% if page.url == "/" %} class="active" {% endif %}><a href="/">Home</a></li>
-                <li {% if page.url == "/about/" %} class="active" {% endif %}><a href="/about">About</a></li>
+                {% comment %}
+                  The following liquid code loops through all the "tabs" in the frontmatter and outputs them.
 
-                <li><a href="#contact">Contact</a></li>
+                  It also checks if the current page url is equal to the tab url.
+                    If it is, then we should make that tab "active".
+                {% endcomment %}
+                
+                {% for tab in page.tabs %} 
+                  <li {% if page.url == tab.url %} class="active" {% endif %}><a href="{{ tab.url }}">{{ tab.name }}</a></li>
+                {% endfor %}               
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                   <ul class="dropdown-menu">
