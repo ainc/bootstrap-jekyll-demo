@@ -1,11 +1,22 @@
 ---
 tabs:
   - name: Home
+    dropdown: false
     url: /
   - name: About
+    dropdown: false
     url: /about/
   - name: Contact
+    dropdown: false
     url: /contact/
+  - name: Cloud
+    dropdown: true
+    url: /cloud/
+    tabs:
+     - name: Objects
+       url: /cloud/objects
+     - name: Other Objects
+       url: /cloud/objects2   
 ---
 
 {% include header.html %}
@@ -38,21 +49,19 @@ tabs:
                 {% endcomment %}
                 
                 {% for tab in page.tabs %} 
-                  <li {% if page.url == tab.url %} class="active" {% endif %}><a href="{{ tab.url }}">{{ tab.name }}</a></li>
+                  {% if tab.dropdown %}
+                   <li class="dropdown {% if page.url contains tab.url %} active {% endif %}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ tab.name }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      {% for subtab in tab.tabs %}
+                        <li><a href="{{ subtab.url }}">{{ subtab.name }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>                   
+                  {% else %}
+                    <li {% if page.url == tab.url %} class="active" {% endif %}><a href="{{ tab.url }}">{{ tab.name }}</a></li>
+                  {% endif %}
                 {% endfor %}               
-
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
               </ul>
             </div>
           </div>
