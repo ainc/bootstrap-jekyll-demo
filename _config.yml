@@ -1,0 +1,11 @@
+name: Nick's Bootstrap Jekyll Demo
+
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+# Custom variables
+#TODO
